@@ -23,13 +23,14 @@ class SeriesController extends Controller
     // vantagem: é muito sipple de usar tendo somente uma classe
     // desvantagem: a modelagem do dominio fica menos espressiva
     public function store(Request $request){
-        $nomeSerie = $request->input('nome');
-        // pego o nome da série do formulário e salvo no banco de dados
-        //Serie é um modelo que representa a tabela series no banco de dados
-        $serie = new Serie();
-        $serie->nome = $nomeSerie;
-        $serie->save();
-        return redirect('/series');
+        Serie::create($request->all());
+        return to_route('series.index');    
     }
 
+    public function destroy(Request $request){
+        Serie::destroy($request->series);
+        return to_route('series.index');{
+        
+        }
+    }
 }
